@@ -49,6 +49,9 @@ class Author(Person):
     def addTitulo(self, livro):
         self.titulos.append(livro)
 
+    def getTitulos(self):
+        return self.titulos
+
     def __str__(self) -> str:
         return super().__str__() + ' escreveu:\n' + f'\n'.join([' - '+str(t) for t in self.titulos])
 

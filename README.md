@@ -8,6 +8,7 @@ Vamos desenvolver um sistema de livraria que retornará no terminal as operaçõ
  - A classe Livro é implementada a partir da classe produto, pois como foi enunciado a livraria pode passar a vender novos produtos, então queremos basicamente nesse caso preco e identificacao do produto, e realizar operações básicas de criar e editar, o delete é basicamente retirar o elemento da lógica do programa. Coloquei uma função opcional getDescription para printar informações dos atributos da classe implementada usando a interface. Entende-se aqui que o valor final do produto para o cliente é o preco de venda do produto para livraria mais impostos.
  - A seguir vamos criar a classe estoque, ela poderia por exemplo ser conectada a um bando de dados para salvar os dados de interesse com relação ao estoque de produtos. Nela vamos implementar um simples dicionário com os produto e a quantidade de estoque presente. Teremos métodos de adicionar produtos ao estoque(add) e remover(remove) e atualizar estoque(atualizar) e busca(search), que retorna -1 caso não encontre e o estoque caso encontre. Em caso de falha para as operações de adição e atualização são retornados false e a operação não é feita.
  - Agora vamos criar a Classe Compras, ela é responsável por salvar a comanda realizada, nela teremos um atributo items que é um dicionário com chave sendo o produto e valor um array com a quantidade de produtos e o preço do produto.
+ - Por último falta a implementação da livraria a qual será bem simples, visto que todas as classes forma implementadas de forma a ajudar esta última etapa, principalmente nas funções de CRUD e na busca.
 
 <img src="./livraria-Page-2.drawio.svg">
 
@@ -277,4 +278,155 @@ Preço         R$ 220.0
 
 PREÇO FINAL : R$ 220.00
 ===============================================
+```
+
+### Classe Padaria
+
+Para esta entrada:
+
+```
+if __name__ == '__main__':
+
+    p = Padaria()
+    
+    a1 = Author('Maquiavel', 'maquiavel@gmail.com')
+    i1 = TaxCalculator()
+    l1 = Livro('O Principe', a1, 'Estrátegia', '45ª', 40, 20, i1)
+    a1.addTitulo(l1)
+    p.addBook(l1, 20)
+
+    a2 = Author('Rick Riordan', 'rickriordan@gmail.com')
+    i2 = TaxCalculator()
+    l2 = Livro('Percy Jackson e o Ladrão de raios', a2, 'Fantasia', '45ª', 50, 20, i1)
+    l3 = Livro('Percy Jackson e o Mar de Monstros', a2, 'Fantasia', '45ª', 50, 20, i1)
+    l4 = Livro('Percy Jackson e a Maldição do Titã', a2, 'Fantasia', '45ª', 50, 20, i1)
+    a2.addTitulo(l2)
+    p.addBook(l2, 15)
+    a2.addTitulo(l3)
+    p.addBook(l3, 25)
+    a2.addTitulo(l4)
+    p.addBook(l4, 30)
+
+    print('\n------------------ Buscas -----------------------')
+    booksa2 = p.searchByAuthor(a2)
+    for b in booksa2:
+        print(b)
+
+    print(p)
+
+    c1 = Client('Marcio', 'marcio@gmail.com')
+    c2 = Client('José', 'jose@gmail.com')
+    p.addClient(c1)
+    p.addClient(c2)
+
+    print(p)
+
+    e1 = Compra()
+    e1.add(l1, 5)
+    e1.add(l2, 1)
+
+    p.addCompra(c1, e1)
+
+    print(p)
+
+
+    p.removeCompra(c1, e1)
+
+    print(p)
+
+    p.deleteBook(l4)
+    p.deleteBook(l3)
+    p.removeClient(c2)
+
+    print(p)
+```
+
+Foi obtida esta saída:
+
+```
+
+------------------ Buscas -----------------------
+Percy Jackson e o Ladrão de raios
+Percy Jackson e o Mar de Monstros
+Percy Jackson e a Maldição do Titã
+============================= Situação da Padaria ==========================
+------------------------------- Estoque --------------------------------------
+Livro: O Principe | Estoque: 20
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 15
+Livro: Percy Jackson e o Mar de Monstros | Estoque: 25
+Livro: Percy Jackson e a Maldição do Titã | Estoque: 30
+------------------------------- Clientes --------------------------------------
+-------------------------------  Compras  -------------------------------------
+
+============================= Situação da Padaria ==========================
+------------------------------- Estoque --------------------------------------
+Livro: O Principe | Estoque: 20
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 15
+Livro: Percy Jackson e o Mar de Monstros | Estoque: 25
+Livro: Percy Jackson e a Maldição do Titã | Estoque: 30
+------------------------------- Clientes --------------------------------------
+
+ +Pessoa: Marcio Email: marcio@gmail.com comprou:
+
+ +Pessoa: José Email: jose@gmail.com comprou:
+-------------------------------  Compras  -------------------------------------
+
+============================= Situação da Padaria ==========================
+------------------------------- Estoque --------------------------------------
+Livro: O Principe | Estoque: 15
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 14
+Livro: Percy Jackson e o Mar de Monstros | Estoque: 25
+Livro: Percy Jackson e a Maldição do Titã | Estoque: 30
+------------------------------- Clientes --------------------------------------
+
+ +Pessoa: Marcio Email: marcio@gmail.com comprou:
+ - ================= NOTA FISCAL =================
+Produto     :    O Principe 
+  Estoque   :    5 
+  Preço Uni.: R$ 44.00
+Preço         R$ 220.0
+
+Produto     :    Percy Jackson e o Ladrão de raios 
+  Estoque   :    1 
+  Preço Uni.: R$ 59.00
+Preço         R$ 59.0
+
+PREÇO FINAL : R$ 279.00
+===============================================
+ +Pessoa: José Email: jose@gmail.com comprou:
+-------------------------------  Compras  -------------------------------------
+================= NOTA FISCAL =================
+Produto     :    O Principe 
+  Estoque   :    5 
+  Preço Uni.: R$ 44.00
+Preço         R$ 220.0
+
+Produto     :    Percy Jackson e o Ladrão de raios 
+  Estoque   :    1 
+  Preço Uni.: R$ 59.00
+Preço         R$ 59.0
+
+PREÇO FINAL : R$ 279.00
+===============================================
+============================= Situação da Padaria ==========================
+------------------------------- Estoque --------------------------------------
+Livro: O Principe | Estoque: 20
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 15
+Livro: Percy Jackson e o Mar de Monstros | Estoque: 25
+Livro: Percy Jackson e a Maldição do Titã | Estoque: 30
+------------------------------- Clientes --------------------------------------
+
+ +Pessoa: Marcio Email: marcio@gmail.com comprou:
+
+ +Pessoa: José Email: jose@gmail.com comprou:
+-------------------------------  Compras  -------------------------------------
+
+============================= Situação da Padaria ==========================
+------------------------------- Estoque --------------------------------------
+Livro: O Principe | Estoque: 20
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 15
+------------------------------- Clientes --------------------------------------
+
+ +Pessoa: Marcio Email: marcio@gmail.com comprou:
+-------------------------------  Compras  -------------------------------------
 ```
