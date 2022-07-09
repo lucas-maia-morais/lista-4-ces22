@@ -5,6 +5,7 @@ Vamos desenvolver um sistema de livraria que retornará no terminal as operaçõ
 ## Diagrama de classes:
  - A classe Author e Client tem uma base comum de nome, email, por isso vão herdar de uma mesma classe, que poderia ser utilizado até para a adição de novos agentes seguindo o Principio de Liskov.
  - A classe TaxCalculator têm a função de calculateTax, que segue o principio do Open Closed, onde a função chamada em Livros não precisa ser modificada, enquanto isso poderiamos criar novas funções de taxa ou até mesmo uma interface para uma calculadora de impostos. No problema decidi somente pela Classe para simplificar o projeto e com um método mais genérico que chama dois métodos particulares.
+ - A classe Livro é implementada a partir da classe produto, pois como foi enunciado a livraria pode passar a vender novos produtos, então queremos basicamente nesse caso preco e identificacao do produto, e realizar operações básicas de criar e editar, o delete é basicamente retirar o elemento da lógica do programa. Coloquei uma função opcional getDescription para printar informações dos atributos da classe implementada usando a interface. Entende-se aqui que o valor final do produto para o cliente é o preco de venda do produto para livraria mais impostos.
 
 <img src="./livraria-Page-2.drawio.svg">
 
@@ -50,7 +51,7 @@ Pessoa: maquiavel Email: maquiavel@gmail.com escreveu:
 
 ```
 
-## Classe TaxCalculator
+### Classe TaxCalculator
 
 A classe faz a implementação dos calculos das taxas e para entrada:
 
@@ -87,3 +88,82 @@ R$ 4.00
 
 
 ### Interface Produtos e Livros
+
+Para a entrada a seguir:
+
+```
+if __name__ == '__main__':
+    print('============== Livro 1 ====================')
+    a1 = Author('Maquiavel', 'maquiavel@gmail.com')
+    i1 = TaxCalculator()
+    l1 = Livro('O Principe', a1, 'Estrátegia', '45ª', 40, 20, i1)
+    print(l1.getDescription())
+
+    print('\n============== Livro 2  adicionando livro ao Autor ====================')
+    a2 = Author('Rick Riordan', 'rickriordan@gmail.com')
+    i2 = TaxCalculator()
+    l2 = Livro('Percy Jackson e o Ladrão de raioz', a2, 'Estrátegia', '45ª', 100, 20, i1)
+    a2.addTitulo(l2)
+    print(l2.getDescription())
+    
+    print('\n============== Correção (e.g. update do nome errdo) ====================')
+    print(l2)
+    l2.update(titulo='Percy Jackson e o Ladrão de raios')
+    print(l2)
+
+    print('\n============== Atualização do Preço ====================')
+    print(l2)
+    print('Preço final Cliente     : ' + 'R$ {:.2f}'.format(l2.preco()) + '')
+    l2.update(preco_venda=50)
+    print('Preço novo final Cliente: ' + 'R$ {:.2f}'.format(l2.preco()) + '')
+
+    print('\n===================== Livro 2 Final ======================')
+    print(l2.getDescription())
+```
+
+
+```
+============== Livro 1 ====================
+Titulo: O Principe
+Autor:  Pessoa: Maquiavel Email: maquiavel@gmail.com escreveu:
+
+Genero: Estrátegia
+Edicao: 45ª
+Preço de Venda     :R$ 40.00
+Preço de Compra    :R$ 20.00
+Impostos           :R$ 4.00
+Preço final Cliente: R$ 44.00
+
+
+============== Livro 2  adicionando livro ao Autor ====================
+Titulo: Percy Jackson e o Ladrão de raioz
+Autor:  Pessoa: Rick Riordan Email: rickriordan@gmail.com escreveu:
+ - Percy Jackson e o Ladrão de raioz
+Genero: Estrátegia
+Edicao: 45ª
+Preço de Venda     :R$ 100.00
+Preço de Compra    :R$ 20.00
+Impostos           :R$ 16.00
+Preço final Cliente: R$ 116.00
+
+
+============== Correção (e.g. update do nome errdo) ====================
+Percy Jackson e o Ladrão de raioz
+Percy Jackson e o Ladrão de raios
+
+============== Atualização do Preço ====================
+Percy Jackson e o Ladrão de raios
+Preço final Cliente     : R$ 116.00
+Preço novo final Cliente: R$ 56.00
+
+===================== Livro 2 Final ======================
+Titulo: Percy Jackson e o Ladrão de raios
+Autor:  Pessoa: Rick Riordan Email: rickriordan@gmail.com escreveu:
+ - Percy Jackson e o Ladrão de raios
+Genero: Estrátegia
+Edicao: 45ª
+Preço de Venda     :R$ 50.00
+Preço de Compra    :R$ 20.00
+Impostos           :R$ 6.00
+Preço final Cliente: R$ 56.00
+```
