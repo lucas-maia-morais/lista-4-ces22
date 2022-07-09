@@ -10,7 +10,7 @@ Vamos desenvolver um sistema de livraria que retornará no terminal as operaçõ
  - Agora vamos criar a Classe Compras, ela é responsável por salvar a comanda realizada, nela teremos um atributo items que é um dicionário com chave sendo o produto e valor um array com a quantidade de produtos e o preço do produto.
  - Por último falta a implementação da livraria a qual será bem simples, visto que todas as classes forma implementadas de forma a ajudar esta última etapa, principalmente nas funções de CRUD e na busca.
 
-<img src="./livraria-Page-2.drawio.svg">
+<img src="./livraria-classes.svg">
 
 ## Classes e testes
 
