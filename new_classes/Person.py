@@ -30,6 +30,9 @@ class Client(Person):
     def addCompra(self,compra):
         self.compras.append(compra)
 
+    def removeCompra(self, compra):
+        self.compras.remove(compra)
+
     def __str__(self) -> str:
         return super().__str__() + ' comprou:\n' + f'\n'.join([' - '+str(c) for c in self.compras])
 
