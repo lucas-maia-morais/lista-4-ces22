@@ -6,6 +6,7 @@ Vamos desenvolver um sistema de livraria que retornará no terminal as operaçõ
  - A classe Author e Client tem uma base comum de nome, email, por isso vão herdar de uma mesma classe, que poderia ser utilizado até para a adição de novos agentes seguindo o Principio de Liskov.
  - A classe TaxCalculator têm a função de calculateTax, que segue o principio do Open Closed, onde a função chamada em Livros não precisa ser modificada, enquanto isso poderiamos criar novas funções de taxa ou até mesmo uma interface para uma calculadora de impostos. No problema decidi somente pela Classe para simplificar o projeto e com um método mais genérico que chama dois métodos particulares.
  - A classe Livro é implementada a partir da classe produto, pois como foi enunciado a livraria pode passar a vender novos produtos, então queremos basicamente nesse caso preco e identificacao do produto, e realizar operações básicas de criar e editar, o delete é basicamente retirar o elemento da lógica do programa. Coloquei uma função opcional getDescription para printar informações dos atributos da classe implementada usando a interface. Entende-se aqui que o valor final do produto para o cliente é o preco de venda do produto para livraria mais impostos.
+ - A seguir vamos criar a classe estoque, ela poderia por exemplo ser conectada a um bando de dados para salvar os dados de interesse com relação ao estoque de produtos. Nela vamos implementar um simples dicionário com os produto e a quantidade de estoque presente. Teremos métodos de adicionar produtos ao estoque(add) e remover(remove) e atualizar estoque(atualizar) e busca(search), que retorna -1 caso não encontre e o estoque caso encontre. Em caso de falha para as operações de adição e atualização são retornados false e a operação não é feita.
 
 <img src="./livraria-Page-2.drawio.svg">
 
@@ -166,4 +167,91 @@ Preço de Venda     :R$ 50.00
 Preço de Compra    :R$ 20.00
 Impostos           :R$ 6.00
 Preço final Cliente: R$ 56.00
+```
+
+### Classe Estoque
+
+Para a seguinte entrada na qual testamos cada função implementada:
+
+```
+if __name__ == '__main__':
+    a1 = Author('Maquiavel', 'maquiavel@gmail.com')
+    i1 = TaxCalculator()
+    l1 = Livro('O Principe', a1, 'Estrátegia', '45ª', 40, 20, i1)
+    a2 = Author('Rick Riordan', 'rickriordan@gmail.com')
+    i2 = TaxCalculator()
+    l2 = Livro('Percy Jackson e o Ladrão de raios', a2, 'Estrátegia', '45ª', 50, 20, i1)
+
+    e = Estoque()
+    e.add(l1)
+    e.add(l2)
+    print(e)
+
+    e.atualizar(l1, 10)
+    print(e)
+
+    e.atualizar(l2, -8)
+    e.atualizar(l1, -8)
+    print(e)
+
+    e.remove(l2)
+    print(e)
+
+    print(e.search(l2))
+    print(e.search(l1))
+```
+
+Temos a seguinte saída esperada:
+
+```
+Livro: O Principe | Estoque: 0
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: O Principe | Estoque: 10
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+(base) lucas@Lucas:~/Documentos/1-ITA/2022.1/CES22/lista-4-ces22/lista-4-ces22$ python new_classes/Estoque.py 
+Livro: O Principe | Estoque: 0
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: Teste | Estoque: 10
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+(base) lucas@Lucas:~/Documentos/1-ITA/2022.1/CES22/lista-4-ces22/lista-4-ces22$ python new_classes/Estoque.py 
+Livro: O Principe | Estoque: 0
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: O Principe | Estoque: 10
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: O Principe | Estoque: 10
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+(base) lucas@Lucas:~/Documentos/1-ITA/2022.1/CES22/lista-4-ces22/lista-4-ces22$ python new_classes/Estoque.py 
+Livro: O Principe | Estoque: 0
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: O Principe | Estoque: 10
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: O Principe | Estoque: 2
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: O Principe | Estoque: 2
+
+-1
+(base) lucas@Lucas:~/Documentos/1-ITA/2022.1/CES22/lista-4-ces22/lista-4-ces22$ python new_classes/Estoque.py 
+Livro: O Principe | Estoque: 0
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: O Principe | Estoque: 10
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: O Principe | Estoque: 2
+Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
+
+Livro: O Principe | Estoque: 2
+
+-1
+2    
 ```
