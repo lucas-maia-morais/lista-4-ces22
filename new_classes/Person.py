@@ -7,9 +7,13 @@ class Person(ABC):
         self.nome = nome
         self.email = email
     
-    def update(self, nome, email):
-        self.nome = nome
-        self.email
+    def update(self, **attributes):
+        for attribute, value in attributes.items():
+            if hasattr(self, attribute):
+                setattr(self, attribute, value)
+            else:
+                raise AttributeError(f'{self.__name__} has no attribute: {attribute}')
+
 
     def __str__(self) -> str:
         return 'Pessoa: ' + self.nome + ' Email: ' + self.email
@@ -47,6 +51,11 @@ class Author(Person):
 
 if __name__ == '__main__':
     p1 = Person('Wagner', 'wagner@gmail.com')
+    print(p1)
+    # change attributes
+    p1.update(nome='Moura')
+    print(p1)
+    p1.update(email='moura@gmail.com')
     print(p1)
     print('')
 
