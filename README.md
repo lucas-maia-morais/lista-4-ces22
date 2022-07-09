@@ -210,48 +210,11 @@ Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
 Livro: O Principe | Estoque: 10
 Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
 
-(base) lucas@Lucas:~/Documentos/1-ITA/2022.1/CES22/lista-4-ces22/lista-4-ces22$ python new_classes/Estoque.py 
-Livro: O Principe | Estoque: 0
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
-Livro: Teste | Estoque: 10
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
-(base) lucas@Lucas:~/Documentos/1-ITA/2022.1/CES22/lista-4-ces22/lista-4-ces22$ python new_classes/Estoque.py 
-Livro: O Principe | Estoque: 0
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
-Livro: O Principe | Estoque: 10
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
-Livro: O Principe | Estoque: 10
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
-(base) lucas@Lucas:~/Documentos/1-ITA/2022.1/CES22/lista-4-ces22/lista-4-ces22$ python new_classes/Estoque.py 
-Livro: O Principe | Estoque: 0
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
-Livro: O Principe | Estoque: 10
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
 Livro: O Principe | Estoque: 2
 Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
 
 Livro: O Principe | Estoque: 2
 
 -1
-(base) lucas@Lucas:~/Documentos/1-ITA/2022.1/CES22/lista-4-ces22/lista-4-ces22$ python new_classes/Estoque.py 
-Livro: O Principe | Estoque: 0
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
-Livro: O Principe | Estoque: 10
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
-Livro: O Principe | Estoque: 2
-Livro: Percy Jackson e o Ladrão de raios | Estoque: 0
-
-Livro: O Principe | Estoque: 2
-
--1
-2    
+2 
 ```
